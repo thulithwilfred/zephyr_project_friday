@@ -19,7 +19,7 @@
 #include "ssd1306/fonts.h"
 #include "ssd1306/ssd1306.h"
 
-/* SOURCE CTRL ENABLED */
+/* SOURCE CTRL ENABLED -- TEST*/
 
 #define STACK_SIZE 512
 #define THREAD_PRIORITY 5 /* Lower Numerics has higher priority, -Ve Priorities are cooperitive threads, +Ve Priorities  are Preemtible  */
