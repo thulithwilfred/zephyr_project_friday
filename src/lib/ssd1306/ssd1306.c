@@ -23,7 +23,7 @@
 #include "ssd1306.h"
 #include <drivers/i2c.h>
 
-extern const struct device *dev_i2c0;
+ const struct device *dev_i2c0;
 /* Write command */
 #define SSD1306_WRITECOMMAND(command) ssd1306_I2C_Write(SSD1306_I2C_ADDR, 0x00, (command))
 /* Write data */
