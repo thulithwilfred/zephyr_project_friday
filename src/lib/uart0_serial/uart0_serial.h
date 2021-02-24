@@ -13,7 +13,7 @@
 #ifndef UART0_SERIAL_H
 #define UART0_SERIAL_H
 
-#define STACK_SIZE_UART0 256
+#define STACK_SIZE_UART0 1024
 #define THREAD_PRIORITY_UART0 6 /* Lower Numerics has higher priority, -Ve Priorities are cooperitive threads, +Ve Priorities  are Preemtible  */
 
 /* Functions */
@@ -27,6 +27,8 @@ int init_uart0(void);
  * rather than generated as a separate function to be branched to. This is normally done for performance reasons. 
  * 
  **/
+void button_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins);
+
 static inline void write_uart_string(const char *str, const struct device *dev_uart);
 
 void spawn_uart0_serial_thread(void);

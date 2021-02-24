@@ -9,20 +9,29 @@
  **/
 
 #include <zephyr.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "device_config/device_config.h"
 #include "uart0_serial/uart0_serial.h"
+
+char tx_out[16];
+uint32_t kernel_uptime;
 
 /* Stack Area/Size Define for runtime threads - Must be globally Defined (Zephyr Threads/Implementations) */
 K_THREAD_STACK_DEFINE(thread_uart_tx_stack_area , STACK_SIZE_UART0);
 struct k_thread uart0_serial_data;
 
-
 void thread_uart_tx(void *unused1, void *unused2, void *unused3) {
-
+	
 	const struct device *dev_uart0 = device_get_binding(DT_LABEL(UART0));
+	int tick = 0;
 
 	while(1) {
-		write_uart_string("Test:\n\r", dev_uart0);
+		//kernel_uptime = k_uptime_get();	
+		//TODO FIX SN OVERFLOW
+		snprintf(tx_out, 16, "tick:%d\n\r", tick);
+		tick = !tick; 
+		write_uart_string(tx_out, dev_uart0);
 		k_msleep(SLEEP_TIME_MS_2);
 	}
 }

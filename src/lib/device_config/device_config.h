@@ -53,7 +53,7 @@
 /* ==================================================================== */
 /* Device tree node identifier for GPIO0 */
 #define GP DT_NODELABEL(gpio0)
-#define EXT_LED_PIN 31
+#define EXT_BUTTON_PIN 31
 
 
 /* ==================================================================== */

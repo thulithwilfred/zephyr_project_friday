@@ -21,4 +21,5 @@ target_sources(app PRIVATE
 		   src/lib/ssd1306/ssd1306_thread.c
 		   src/lib/debug_leds/debug_leds.c
 		   src/lib/uart0_serial/uart0_serial.c
+		   src/lib/push_button/push_button.c
 	       )

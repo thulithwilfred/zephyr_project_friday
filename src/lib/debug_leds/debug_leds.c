@@ -26,12 +26,11 @@ void thread_blink_brd_led0(void *unused1, void *unused2, void *unused3)
 {
 	bool led_is_on = true;
 	/* Obtain pre-initialised device binding - see device_config.h */
-	const struct device *dev_brd_led0 = device_get_binding(LED0);
+	const struct device *dev_gpio0 = device_get_binding(DT_LABEL(GP));
 
 	while (1)
 	{
-		gpio_pin_set(dev_brd_led0, BRD_LED_PIN, (int)led_is_on);
-		
+		gpio_pin_set(dev_gpio0, EXT_BUTTON_PIN, (int)led_is_on);
 		led_is_on = !led_is_on;
 		k_msleep(SLEEP_TIME_MS_2);
 	}
@@ -90,23 +89,4 @@ int init_led_pin(void)
 		 return r1 && r2;
 	}
 	
-}
-
-/* Init GPIO_PIN_31, will return 0 on completion */
-//TODO: SET UP AS RISING EDGE IRQ - Currently Output LED
-int init_gpio(void)
-{
-	/* Obtain pre-initialised device binding - see device_config.h */
-	const struct device *dev_gpio0_usr = device_get_binding(DT_LABEL(GP));
-
-	if (!dev_gpio0_usr)
-	{
-		/* Unable to retrive device structure */
-		return -ENODEV;
-	}
-	else
-	{
-		/* Configure GPIO_PIN_31 as GPIO Out for external LED use */
-		return gpio_pin_configure(dev_gpio0_usr, EXT_LED_PIN, GPIO_OUTPUT_ACTIVE | FLAGS);
-	}
 }

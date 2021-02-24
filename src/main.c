@@ -15,11 +15,10 @@
 #include "ssd1306/ssd1306_thread.h"
 #include "debug_leds/debug_leds.h"
 #include "uart0_serial/uart0_serial.h"
-
+#include "push_button/push_button.h"
 /* To be include last, due to dependacies */
 
 /*    ---------------------------------   */
-
 void main(void)
 {
 	/* Initialize Pheripherals */
@@ -33,6 +32,7 @@ void spawn_pheripheral_threads(void) {
 
 	/* Spawn SSD1306 Display Control Thread */
 	spawn_ssd1306_thread();
+	/* Spawn Uart0 - Thread (Only TX as of now) */
 	spawn_uart0_serial_thread();
 
 }

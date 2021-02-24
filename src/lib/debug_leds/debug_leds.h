@@ -5,7 +5,9 @@
  * Organization: UQ
  * 
  * Brief: Contains Debug LED threads required definitions and
- *          function declarations. 
+ *          function declarations 
+ * 
+ * Accessed by:  main.c. 
  ***************************************************************
  **/
 #ifndef DEBUG_LEDS_H
