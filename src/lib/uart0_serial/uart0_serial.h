@@ -9,7 +9,6 @@
  ***************************************************************
  **/
 
-
 #ifndef UART0_SERIAL_H
 #define UART0_SERIAL_H
 
@@ -18,7 +17,6 @@
 
 /* Functions */
 int init_uart0(void);
-
 
 /** NOTE static means it can't be referenced from another compilation unit (source file)."Referenced" means called,
  *  or otherwise referred to by name, e.g. assigned to a function pointer.

@@ -155,7 +155,6 @@ uint8_t SSD1306_Init(void)
 	/* Init I2C */
 	ssd1306_I2C_Init();
 
-
 	/* A little delay */
 	uint32_t p = 2500;
 	while (p > 0)

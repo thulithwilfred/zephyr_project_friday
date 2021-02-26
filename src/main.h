@@ -13,7 +13,6 @@
 #define STACK_SIZE 512
 #define THREAD_PRIORITY 5 /* Lower Numerics has higher priority, -Ve Priorities are cooperitive threads, +Ve Priorities  are Preemtible  */
 
-
 /* ==================================================================== */
 /* =============================Functions============================== */
 /* ==================================================================== */
@@ -26,6 +25,5 @@ void spawn_pheripheral_threads(void);
 void thread_blink_ext_led(void *unused1, void *unused2, void *unused3);
 
 void thread_blink_brd_led(void *unused1, void *unused2, void *unused3);
-
 
 #endif

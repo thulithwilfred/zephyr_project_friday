@@ -18,24 +18,25 @@ char tx_out[16];
 uint32_t kernel_uptime;
 
 /* Stack Area/Size Define for runtime threads - Must be globally Defined (Zephyr Threads/Implementations) */
-K_THREAD_STACK_DEFINE(thread_uart_tx_stack_area , STACK_SIZE_UART0);
+K_THREAD_STACK_DEFINE(thread_uart_tx_stack_area, STACK_SIZE_UART0);
 struct k_thread uart0_serial_data;
 
-void thread_uart_tx(void *unused1, void *unused2, void *unused3) {
-	
+void thread_uart_tx(void *unused1, void *unused2, void *unused3)
+{
+
 	const struct device *dev_uart0 = device_get_binding(DT_LABEL(UART0));
 	int tick = 0;
 
-	while(1) {
-		//kernel_uptime = k_uptime_get();	
+	while (1)
+	{
+		//kernel_uptime = k_uptime_get();
 		//TODO FIX SN OVERFLOW
 		snprintf(tx_out, 16, "tick:%d\n\r", tick);
-		tick = !tick; 
+		tick = !tick;
 		write_uart_string(tx_out, dev_uart0);
 		k_msleep(SLEEP_TIME_MS_2);
 	}
 }
-
 
 static inline void write_uart_string(const char *str, const struct device *dev_uart)
 {
@@ -46,29 +47,28 @@ static inline void write_uart_string(const char *str, const struct device *dev_u
 	}
 }
 
-void spawn_uart0_serial_thread(void) {
+void spawn_uart0_serial_thread(void)
+{
 	/*Stack area - _K_THREAD_STACK, allows the define a stack that will host user threads 
 	* If CONFIG_USERSPACE is not enabled, the set of K_THREAD_STACK
 	* macros have an identical effect to the K_KERNEL_STACK macros. */
-	
-	/*-----------------------------------------------------------------------------------------------------------*/	
-	/*Spawns SSD1306 THREAD */	
+
+	/*-----------------------------------------------------------------------------------------------------------*/
+	/*Spawns SSD1306 THREAD */
 	k_tid_t tid_uart0_serial = k_thread_create(&uart0_serial_data, thread_uart_tx_stack_area, K_THREAD_STACK_SIZEOF(thread_uart_tx_stack_area),
-												thread_uart_tx, NULL, NULL, NULL, THREAD_PRIORITY_UART0, 0, K_NO_WAIT);
-
+											   thread_uart_tx, NULL, NULL, NULL, THREAD_PRIORITY_UART0, 0, K_NO_WAIT);
 }
-
 
 /* Initialize UART0, will return 0 on complettion */
 int init_uart0(void)
 {
 
 	const struct uart_config uart_cfg = {
-    .baudrate = 9600,
-    .parity = UART_CFG_PARITY_NONE,
-    .stop_bits = UART_CFG_STOP_BITS_1,
-    .data_bits = UART_CFG_DATA_BITS_8,
-    .flow_ctrl = UART_CFG_FLOW_CTRL_NONE};
+		.baudrate = 9600,
+		.parity = UART_CFG_PARITY_NONE,
+		.stop_bits = UART_CFG_STOP_BITS_1,
+		.data_bits = UART_CFG_DATA_BITS_8,
+		.flow_ctrl = UART_CFG_FLOW_CTRL_NONE};
 
 	/* Obtain pre-initialised device binding - see device_config.h */
 	const struct device *dev_uart0 = device_get_binding(DT_LABEL(UART0));

@@ -23,11 +23,9 @@ void thread_blink_brd_led0(void *unused1, void *unused2, void *unused3);
 void thread_blink_brd_led1(void *unused1, void *unused2, void *unused3);
 void thread_blink_brd_led2(void *unused1, void *unused2, void *unused3);
 
-
 /* Function */
 int init_gpio(void);
 
 int init_led_pin(void);
-
 
 #endif

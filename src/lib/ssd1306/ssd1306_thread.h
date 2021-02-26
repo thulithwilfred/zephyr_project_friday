@@ -32,5 +32,4 @@ void SSD1306_Zephyr(void);
 
 int init_i2c(void);
 
-
 #endif

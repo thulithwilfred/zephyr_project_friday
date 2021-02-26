@@ -9,13 +9,13 @@
  ***************************************************************
  **/
 
-
 #include <zephyr.h>
 #include "ssd1306/ssd1306_thread.h"
 /* To be include last, due to dependacies */
 #include "device_config/device_config.h"
 #include "ssd1306/fonts.h"
 #include "ssd1306/ssd1306.h"
+#include <stdio.h>
 
 /** These macros creates (starts with no delay) threads at compile time : DISABLED  - An alternative way to start threads - 
  * 			not ideal as hardware should be configured first (these start at 'tick 0')
@@ -28,7 +28,7 @@ struct k_thread ssd1306_thread_data;
 
 /* Init Display Mode Global Var */
 short int displayMode = 0;
-extern short int clearDisplay = 0;
+short int clearDisplay = 0;
 
 /* Display Mode: SSD1306 Buffer */
 char buff[8];
@@ -37,35 +37,38 @@ char buff[8];
 void thread_ssd1306_ctrl(void *unused1, void *unused2, void *unused3)
 {
 	/* Initialise SSD1306_Driver */
-    SSD1306_Init();
+	SSD1306_Init();
 
-    /* Send message to display */
-    SSD1306_Hello();
+	/* Send message to display */
+	SSD1306_Hello();
 
 	k_msleep(250);
 
-    while(1) {
+	while (1)
+	{
 
-		if (clearDisplay) {
+		if (clearDisplay)
+		{
 			SSD1306_Clear();
 			clearDisplay = 0;
 		}
 
-		switch(displayMode) {
-			
-			case 0:
-				SSD1306_Hello();
-				break;
+		switch (displayMode)
+		{
 
-			case 1:
-				SSD1306_AUX();
-				break;
+		case 0:
+			SSD1306_Hello();
+			break;
 
-			case 2:
-				SSD1306_Zephyr();
-				break;
+		case 1:
+			SSD1306_AUX();
+			break;
+
+		case 2:
+			SSD1306_Zephyr();
+			break;
 		}
-		k_msleep(500);	
+		k_msleep(500);
 	}
 }
 //TODO: Add comments
@@ -83,7 +86,8 @@ void SSD1306_Hello(void)
 	SSD1306_UpdateScreen();
 }
 
-void SSD1306_AUX(void) {
+void SSD1306_AUX(void)
+{
 
 	snprintf(buff, (sizeof(char) * 8), "Mode:%d", displayMode);
 
@@ -94,12 +98,11 @@ void SSD1306_AUX(void) {
 	SSD1306_GotoXY(10, 40);
 	SSD1306_Puts("Humidity:xx", &Font_7x10, 1);
 
-	SSD1306_UpdateScreen();	
+	SSD1306_UpdateScreen();
 }
 
-
-
-void SSD1306_Zephyr(void) {
+void SSD1306_Zephyr(void)
+{
 
 	snprintf(buff, (sizeof(char) * 8), "Mode:%d", displayMode);
 
@@ -110,21 +113,19 @@ void SSD1306_Zephyr(void) {
 	SSD1306_GotoXY(10, 40);
 	SSD1306_Puts("     RTOS  ", &Font_7x10, 1);
 
-	SSD1306_UpdateScreen();	
+	SSD1306_UpdateScreen();
 }
 
-
-
-void spawn_ssd1306_thread(void) {
+void spawn_ssd1306_thread(void)
+{
 	/*Stack area - _K_THREAD_STACK, allows the define a stack that will host user threads 
 	* If CONFIG_USERSPACE is not enabled, the set of K_THREAD_STACK
 	* macros have an identical effect to the K_KERNEL_STACK macros. */
-	
-	/*-----------------------------------------------------------------------------------------------------------*/	
-	/*Spawns SSD1306 THREAD */	
-	k_tid_t tid_ssd1306_ctrl = k_thread_create(&ssd1306_thread_data, thread_ssd1306_ctrl_stack_area, STACK_SIZE_SSD1306,
-												thread_ssd1306_ctrl, NULL, NULL, NULL,5, 0, K_NO_WAIT);
 
+	/*-----------------------------------------------------------------------------------------------------------*/
+	/*Spawns SSD1306 THREAD */
+	k_tid_t tid_ssd1306_ctrl = k_thread_create(&ssd1306_thread_data, thread_ssd1306_ctrl_stack_area, STACK_SIZE_SSD1306,
+											   thread_ssd1306_ctrl, NULL, NULL, NULL, 5, 0, K_NO_WAIT);
 }
 
 /* Init I2C, will return 0 on completeion */

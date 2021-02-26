@@ -18,9 +18,6 @@
 K_THREAD_DEFINE(tid_thread_blink_brd_led1, STACK_SIZE_LED_THREAD, thread_blink_brd_led1, NULL, NULL, NULL, THREAD_PRIORITY_LED_THREAD, 0, 0);
 K_THREAD_DEFINE(tid_thread_blink_brd_led2, STACK_SIZE_LED_THREAD, thread_blink_brd_led2, NULL, NULL, NULL, THREAD_PRIORITY_LED_THREAD, 0, 0);
 
-
-
-
 /* This thread will blink BRD_LED - Blue */
 void thread_blink_brd_led0(void *unused1, void *unused2, void *unused3)
 {
@@ -35,7 +32,6 @@ void thread_blink_brd_led0(void *unused1, void *unused2, void *unused3)
 		k_msleep(SLEEP_TIME_MS_2);
 	}
 }
-
 
 /* This thread will blink BRD_STATUS_LED - Red */
 void thread_blink_brd_led1(void *unused1, void *unused2, void *unused3)
@@ -65,8 +61,6 @@ void thread_blink_brd_led2(void *unused1, void *unused2, void *unused3)
 	}
 }
 
-
-
 /* Initialize ON_BRD_LED Blue and ON_BRD_STATUS_LED - Red */
 int init_led_pin(void)
 {
@@ -83,10 +77,9 @@ int init_led_pin(void)
 	else
 	{
 		/* Configrue BRD_LED using attained deivice struct as GPIO_OUT */
-		 int r1 = gpio_pin_configure(dev_brd_led2, BRD_LED2_PIN, GPIO_OUTPUT_ACTIVE | FLAGS2);
-		 int r2 = gpio_pin_configure(dev_brd_led1, BRD_LED1_PIN, GPIO_OUTPUT_ACTIVE | FLAGS1);
-		 //int r3 = gpio_pin_configure(dev_brd_led0, BRD_LED_PIN, GPIO_OUTPUT_ACTIVE | FLAGS);
-		 return r1 && r2;
+		int r1 = gpio_pin_configure(dev_brd_led2, BRD_LED2_PIN, GPIO_OUTPUT_ACTIVE | FLAGS2);
+		int r2 = gpio_pin_configure(dev_brd_led1, BRD_LED1_PIN, GPIO_OUTPUT_ACTIVE | FLAGS1);
+		//int r3 = gpio_pin_configure(dev_brd_led0, BRD_LED_PIN, GPIO_OUTPUT_ACTIVE | FLAGS);
+		return r1 && r2;
 	}
-	
 }
