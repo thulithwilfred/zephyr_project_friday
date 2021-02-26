@@ -43,6 +43,7 @@ void setup(void)
 	/* Capture Return Values - Makes it Readable */
 	
 	/* Internal Initialization, init_* functions will return 0 if successful */
+	//TODO: Check retval to see if init passed.
 	init_led_pin(); //Location: debug_leds
 	init_gpio();	//Location: debug_leds 
 	init_i2c();		//Location: ssd1306

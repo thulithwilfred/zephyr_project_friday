@@ -1,3 +1,14 @@
+/** 
+ ***************************************************************
+ * Author: Wilfred MK
+ * StudentID: S4428042
+ * Organization: UQ
+ * Brief: Initialises an external push button used for display
+ *          mode toggling.
+ *        Sets up interrupt and debounces pushbutton.
+ ***************************************************************
+ **/
+
 #include "device_config/device_config.h"
 #include "push_button/push_button.h"
 #include "ssd1306/ssd1306_thread.h"

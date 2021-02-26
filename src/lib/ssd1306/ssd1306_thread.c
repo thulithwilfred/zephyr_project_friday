@@ -33,7 +33,7 @@ extern short int clearDisplay = 0;
 /* Display Mode: SSD1306 Buffer */
 char buff[8];
 
-/* This thread will blink the EXT_LED */
+/* This thread will control the SSD1306 display */
 void thread_ssd1306_ctrl(void *unused1, void *unused2, void *unused3)
 {
 	/* Initialise SSD1306_Driver */
