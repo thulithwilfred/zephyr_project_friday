@@ -7,7 +7,7 @@
  ***************************************************************
  **/
 
-/* TESTING COMMIT - FROM LAPTOP */
+/* TESTING COMMIT - FROM LAPTOP - TEST 2*/
 #include <zephyr.h>
 #include <device.h>
 #include <devicetree.h>
