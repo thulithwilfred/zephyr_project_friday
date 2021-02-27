@@ -7,7 +7,6 @@
  ***************************************************************
  **/
 
-/* TESTING COMMIT - FROM LAPTOP - TEST 2*/
 #include <zephyr.h>
 #include <device.h>
 #include <devicetree.h>
@@ -19,6 +18,7 @@
 #include "uart0_serial/uart0_serial.h"
 #include "push_button/push_button.h"
 /* To be include last, due to dependacies */
+//TODO: Testing GIT Between, Desktop & Laptop - vscode
 
 /*    ---------------------------------   */
 void main(void)
